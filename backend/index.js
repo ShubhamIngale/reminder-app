@@ -61,7 +61,7 @@ require('./config/db');
 
 // base app link
 app.get("/api", (req, res) => {
-        res.send("Hey there! Reminder server is up and running!!");
+        res.status(200).json({success: true, message: "Hey there! Reminder server is up and running!!"});
 });
 
 // reminder links
