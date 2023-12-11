@@ -1,6 +1,7 @@
 const User = require("../models/userModal");
 const TempUser = require("../models/tempUserModal");
 const jwt = require("jsonwebtoken");
+const otpMailer = require("../utils/otpMailer");
 
 const createUser = async (req, res) => {
         let tempUser = await TempUser.findOne({'email': req.body.email, 'otp.code': req.body.otp_code});
@@ -52,7 +53,10 @@ const registrationOtp = async (req, res) => {
                         'otp.code': Math.floor((Math.random()*10000) + 1),
                         'otp.expireIn': new Date().getTime() + 600000
                 })
-                .then(data => res.json({success: true, message: "OTP sent on provided email id", data}))
+                .then(data => {
+                        otpMailer(data);
+                        res.json({success: true, message: "OTP sent on provided email id"});
+                })
                 .catch(err => res.json({success: false, message: "Error occured", data: err}))
         }
 }
@@ -67,14 +71,18 @@ const loginOtp = async (req, res) => {
                 User.updateOne({email: req.body.email}, {
                         'otp.code': Math.floor((Math.random()*10000) + 1),
                         'otp.expireIn': new Date().getTime() + 600000
+                }, { returnOriginal: false },)
+                .then(async (data) => {
+                        let updatedData = await User.findOne({'email': req.body.email});
+                        otpMailer(updatedData);
+                        res.json({success: true, message: "OTP sent on provided email id"});
                 })
-                .then(data => res.json({success: true, message: "OTP sent on provided email id"}))
                 .catch(err => res.json({success: false, message: "Error occured", data: err}))
         }
 }
 
 const loginUser = async (req, res) => {
-        let user = await User.findOne({'email': req.body.email, 'otp.code': req.body.otp_code});
+        let user = await User.findOne({'email': req.body.email, 'otp.code': req.body.otp_code}).populate({path: 'reminders', select: "-user"});
 
         if(!user) {
                 return res.status(301).json({success: false, message: 'No OTP Found'})

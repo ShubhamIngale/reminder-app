@@ -1,0 +1,17 @@
+.login-div {
+        height: calc(100vh - 57px);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+}
+
+.login-div .login-form-card {
+        padding: 32px;
+        width: 350px;
+        border: 1px solid #E7E7E7;
+        border-radius: 16px;
+}
+.login-div .login-form-card h2 {
+        margin-bottom: 16px
+}
