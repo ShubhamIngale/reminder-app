@@ -5,6 +5,7 @@ import { MainContext } from "./utils/context";
 import Login from "./pages/Login";
 import { Button, Col, Row, message } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
+import Reminders from "./pages/Reminders";
 
 function App() {
   const { token, setToken } = useContext(MainContext);
@@ -49,8 +50,8 @@ function App() {
       {
         token ?
         <Routes>
-          <Route path="/" exact element={<>Reminders</>} />
-          <Route path="*" exact element={<>Reminders</>} />
+          <Route path="/" exact element={<Reminders />} />
+          <Route path="*" exact element={<Reminders/>} />
         </Routes> :
         <Routes>
           <Route path="/" exact element={<Login />} />

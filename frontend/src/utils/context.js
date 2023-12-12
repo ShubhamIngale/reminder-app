@@ -37,7 +37,9 @@ const MainContextProvider = ({children}) => {
                                 storeData,
                                 fetchData,
                                 token,
-                                setToken
+                                setToken,
+                                user,
+                                setUser
                         }}
                 >
                         {children}
