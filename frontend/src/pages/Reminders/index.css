@@ -7,6 +7,9 @@
         font-weight: 500;
         margin-bottom: 12px;
 }
+.reminders-row {
+        margin-bottom: 24px;
+}
 
 .reminders-div .reminder-card .card {
         padding: 16px;
@@ -25,7 +28,8 @@
         margin-bottom: 8px;
 }
 .reminders-div .reminder-card .card .date {
+        margin-top: 20px;
         color: #737373;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 500;
 }

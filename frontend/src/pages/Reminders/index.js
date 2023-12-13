@@ -10,32 +10,55 @@ const Reminders = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const style = {
-    border: "1px solid red"
-  }
+  const ReminderCard = (item) => (
+    <Col lg={8} xs={24} key={item?._id} className='reminder-card'>
+      <div className="card">
+        <p className="card-title">{item?.title}</p>
+        <p className="card-desc">{item?.description}</p>
+        <p className="date">
+          {
+            moment(item?.date).format("DD MMM YYYY")
+          }
+        </p>
+      </div>
+    </Col>
+  )
 
   return (
     <div className='reminders-div'>
       <p className="header">Previous</p>
+      <Row gutter={16} className='reminders-row'>
+        {
+          user
+          ?.reminders
+          ?.filter(item => {
+            return moment(item?.date).diff(moment(new Date()), 'days') <= -1
+          })
+          ?.map((item, i) => ReminderCard(item))
+        }
+      </Row>
       <p className="header">Today's</p>
+      <Row gutter={16} className='reminders-row'>
+        {
+          user
+          ?.reminders
+          ?.filter(item => {
+            return moment(item?.date).diff(moment(new Date()), 'days') === 0
+          })
+          ?.map((item, i) => ReminderCard(item))
+        }
+      </Row>
       <p className="header">Upcoming</p>
-        <Row gutter={16}>
-          {
-            user?.reminders?.map((item, i) => (
-              <Col lg={4} xs={12} key={item?._id} className='reminder-card'>
-                <div className="card">
-                  <p className="card-title">{item?.title}</p>
-                  <p className="card-desc">{item?.description}</p>
-                  <p className="date">
-                    {
-                      moment(item?.date).format("DD MMM YYYY")
-                    }
-                  </p>
-                </div>
-              </Col>
-            ))
-          }
-        </Row>
+      <Row gutter={16} className='reminders-row'>
+        {
+          user
+          ?.reminders
+          ?.filter(item => {
+            return moment(item?.date).diff(moment(new Date()), 'days') > 0
+          })
+          ?.map((item, i) => ReminderCard(item))
+        }
+      </Row>
     </div>
   )
 }
