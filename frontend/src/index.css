@@ -3,3 +3,10 @@
         padding: 0;
         font-family: 'Montserrat', sans-serif;
 }
+
+.loader-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;   
+}

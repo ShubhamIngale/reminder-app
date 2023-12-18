@@ -1,6 +1,7 @@
 import React, {useState, useEffect, createContext} from 'react';
 import {apiUrl} from './constants';
 import { jwtDecode } from "jwt-decode";
+import { message } from 'antd';
 
 export const storeData = (type, value) => {
         localStorage.setItem(type, JSON.stringify(value))
@@ -17,6 +18,37 @@ const MainContextProvider = ({children}) => {
 
         const [token, setToken] = useState(fetchData('token') || '');
         const [user, setUser] = useState(fetchData('user') || {});
+        const [reminders, setReminders] = useState([]);
+
+        const [remindersLoading, setRemindersLoading] = useState(false);
+
+        const getRemindersHandler = () => {
+                setRemindersLoading(true);
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", `Bearer ${token}`);
+
+                var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+                };
+
+                fetch(`${apiUrl}api/reminders`, requestOptions)
+                .then(response => response.json())
+                .then(res => {
+                        setRemindersLoading(false);
+                        if(res?.success) {
+                                setReminders(res?.data);
+                        }
+                        else {
+                                message.error(res?.message);
+                        }
+                })
+                .catch(error => {
+                        setRemindersLoading(false);
+                        console.log('error', error);
+                });
+        }
 
         useEffect(() => {
                 storeData("token", token);
@@ -39,7 +71,10 @@ const MainContextProvider = ({children}) => {
                                 token,
                                 setToken,
                                 user,
-                                setUser
+                                setUser,
+                                getRemindersHandler,
+                                remindersLoading,
+                                reminders
                         }}
                 >
                         {children}
