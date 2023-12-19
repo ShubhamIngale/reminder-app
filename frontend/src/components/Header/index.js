@@ -132,7 +132,7 @@ const Header = (
                                         },
                                 ]}
                         >
-                                <DatePicker format="DD MMMM YYYY" style={{width: "50%"}} />
+                                <DatePicker format="DD MMM YYYY, hh:mm" showTime style={{width: "100%"}}/>
                         </Form.Item>
                         <Form.Item>
                                 <Space>

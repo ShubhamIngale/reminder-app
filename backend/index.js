@@ -19,14 +19,14 @@ const getReminders = () => {
         .then((data) => {
                 newArr = data;
                 data?.map(item => (
-                        mailer(["ashishtripathi911991@gmail.com", "singale864@gmail.com"], item)
+                        mailer(["singale864@gmail.com"], item)
                 ))
         })
         .then(() => {
                 if(newArr?.length) {
                         Reminder.updateMany({
                                 $and: [
-                                        { date:  new Date(dt1.getTime() + 19800000).toISOString().split('T')[0] },
+                                        { date:  new Date(dt1.getTime() + 19800000) },
                                         { notified: false}
                                       ],
                         }, {$set: {notified: true}})
@@ -43,7 +43,7 @@ const getReminders = () => {
 // });
 cron.schedule("*/5 * * * * *", () => {
         getReminders();
-        console.log("fsogfjd")
+        // console.log("fsogfjd")
 });
       
 
