@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./index.css";
 import {MainContext} from '../../utils/context';
-import {Button, Col, Row, Spin} from 'antd';
+import {Button, Col, Row, Spin, Tabs} from 'antd';
 import moment from 'moment';
 
 const Reminders = () => {
@@ -34,36 +34,41 @@ const Reminders = () => {
           <Spin size='large'/>
         </div> :
         <>
-        <p className="header">Previous</p>
-        <Row gutter={[16, 16]} className='reminders-row'>
-          {
-            reminders
-            ?.filter(item => {
-              return moment(item?.date).diff(moment(new Date()), 'days') <= -1
-            })
-            ?.map((item, i) => ReminderCard(item))
-          }
-        </Row>
-        <p className="header">Today's</p>
-        <Row gutter={[16, 16]} className='reminders-row'>
-          {
-            reminders
-            ?.filter(item => {
-              return moment(item?.date).diff(moment(new Date()), 'days') === 0
-            })
-            ?.map((item, i) => ReminderCard(item))
-          }
-        </Row>
-        <p className="header">Upcoming</p>
-        <Row gutter={[16, 16]} className='reminders-row'>
-          {
-            reminders
-            ?.filter(item => {
-              return moment(item?.date).diff(moment(new Date()), 'days') > 0
-            })
-            ?.map((item, i) => ReminderCard(item))
-          }
-        </Row>
+        <Tabs>
+          <Tabs.TabPane tab="Previous" key={1}>
+            <Row gutter={[16, 16]} className='reminders-row'>
+              {
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') <= -1
+                })
+                ?.map((item, i) => ReminderCard(item))
+              }
+            </Row>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Today's" key={2}>
+            <Row gutter={[16, 16]} className='reminders-row'>
+              {
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') === 0
+                })
+                ?.map((item, i) => ReminderCard(item))
+              }
+            </Row>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Upcoming" key={3}>
+            <Row gutter={[16, 16]} className='reminders-row'>
+              {
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') > 0
+                })
+                ?.map((item, i) => ReminderCard(item))
+              }
+            </Row>
+          </Tabs.TabPane>
+        </Tabs>
         </>
       }
     </div>
