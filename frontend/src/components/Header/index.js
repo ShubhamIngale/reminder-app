@@ -28,7 +28,7 @@ const Header = (
                         var raw = JSON.stringify({
                                 "title": values?.title,
                                 "description": values?.description,
-                                "date": values?.date,
+                                "date": moment(values?.date).format("YYYY-MM-DD"),
                                 "user_id": user?._id
                         });
 
@@ -132,7 +132,7 @@ const Header = (
                                         },
                                 ]}
                         >
-                                <DatePicker format="DD MMM YYYY, hh:mm" showTime style={{width: "100%"}}/>
+                                <DatePicker format="DD MMM YYYY" style={{width: "100%"}}/>
                         </Form.Item>
                         <Form.Item>
                                 <Space>
