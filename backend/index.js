@@ -38,13 +38,13 @@ const getReminders = () => {
 }
 
 // cron
-cron.schedule("00 00 09 * * *", () => {
-        getReminders();
-});
-// cron.schedule("*/5 * * * * *", () => {
+// cron.schedule("00 00 09 * * *", () => {
 //         getReminders();
-//         console.log("fsogfjd")
 // });
+cron.schedule("*/5 * * * * *", () => {
+        getReminders();
+        console.log("fsogfjd")
+});
       
 
 // dotenv
