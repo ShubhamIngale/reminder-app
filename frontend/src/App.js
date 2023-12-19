@@ -9,7 +9,7 @@ import Header from "./components/Header";
 function App() {
   const { token, setToken } = useContext(MainContext);
   return (
-    <div style={{height: "100vh"}}>
+    <div style={{height: "100vh", maxWidth: "400px", margin: "0 auto"}}>
       <Header token={token} setToken={setToken} />
       {
         token ?

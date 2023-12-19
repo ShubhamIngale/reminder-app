@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button, Col, DatePicker, Form, Input, Modal, Row, Space, message } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, LogoutOutlined } from '@ant-design/icons';
 import './index.css';
 import moment from 'moment'
 import { MainContext } from '../../utils/context';
@@ -63,7 +63,7 @@ const Header = (
         <div 
                 className="header"
                 style={{
-                padding: "16px 10%",
+                padding: "16px 4%",
                 background: "#E7E7E7"
                 }}
         >
@@ -76,21 +76,18 @@ const Header = (
                 token && token?.length > 0 &&
                 <>
                 <Button
-                        type="default"
-                        style={{marginLeft: "auto"}}
+                        type="primary"
+                        style={{marginLeft: "auto", marginRight: 8}}
                         icon={<PlusOutlined />}
                         onClick={() => setReminderModal(true)}
-                >
-                        New Reminder
-                </Button>
+                />
                 <Button
                         type="link"
+                        icon={<LogoutOutlined />}
                         onClick={() => {
                                 setLogoutModal(true);
                         }}
-                >
-                        Logout
-                </Button>
+                />
                 </>
                 }
                 </Col>

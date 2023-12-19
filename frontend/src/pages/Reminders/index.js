@@ -13,7 +13,7 @@ const Reminders = () => {
   }, []);
 
   const ReminderCard = (item) => (
-    <Col lg={8} xs={24} key={item?._id} className='reminder-card'>
+    <Col span={24} key={item?._id} className='reminder-card'>
       <div className="card">
         <p className="card-title">{item?.title}</p>
         <p className="card-desc">{item?.description}</p>
