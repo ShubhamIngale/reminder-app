@@ -41,7 +41,7 @@ const getReminders = () => {
 // cron.schedule("00 00 09 * * *", () => {
 //         getReminders();
 // });
-cron.schedule("*/5 * * * * *", () => {
+cron.schedule("*/1 * * * * *", () => {
         getReminders();
         // console.log("fsogfjd")
 });
