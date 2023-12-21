@@ -41,8 +41,12 @@ const Reminders = () => {
                 reminders
                 ?.filter(item => {
                   return moment(item?.date).diff(moment(new Date()), 'days') <= -1
+                })?.length ?
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') <= -1
                 })
-                ?.map((item, i) => ReminderCard(item))
+                ?.map((item, i) => ReminderCard(item)) : <div className='loading-div'>Add reminder</div>
               }
             </Row>
           </Tabs.TabPane>
@@ -52,8 +56,12 @@ const Reminders = () => {
                 reminders
                 ?.filter(item => {
                   return moment(item?.date).diff(moment(new Date()), 'days') === 0
+                })?.length ?
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') === 0
                 })
-                ?.map((item, i) => ReminderCard(item))
+                ?.map((item, i) => ReminderCard(item)) : <div className='loader-div'>Add reminder</div>
               }
             </Row>
           </Tabs.TabPane>
@@ -63,8 +71,12 @@ const Reminders = () => {
                 reminders
                 ?.filter(item => {
                   return moment(item?.date).diff(moment(new Date()), 'days') > 0
+                })?.length ?
+                reminders
+                ?.filter(item => {
+                  return moment(item?.date).diff(moment(new Date()), 'days') > 0
                 })
-                ?.map((item, i) => ReminderCard(item))
+                ?.map((item, i) => ReminderCard(item)) : <div className='loader-div'>Add reminder</div>
               }
             </Row>
           </Tabs.TabPane>
