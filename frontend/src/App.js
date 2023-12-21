@@ -7,9 +7,15 @@ import Reminders from "./pages/Reminders";
 import Header from "./components/Header";
 
 function App() {
-  const { token, setToken } = useContext(MainContext);
+  const { token, setToken, theme } = useContext(MainContext);
   return (
-    <div style={{height: "100vh", maxWidth: "400px", margin: "0 auto"}}>
+    <div style={{
+        height: "100vh", 
+        maxWidth: "400px", 
+        margin: "0 auto", 
+        background: "#FFFFFF",
+        filter: theme === "light" ? "invert(0)" : "invert(90%)"
+      }}>
       <Header token={token} setToken={setToken} />
       {
         token ?

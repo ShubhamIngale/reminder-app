@@ -16,6 +16,7 @@ const MainContext = createContext();
 
 const MainContextProvider = ({children}) => {
 
+        const [theme, setTheme] = useState(fetchData('theme') || 'light');
         const [token, setToken] = useState(fetchData('token') || '');
         const [user, setUser] = useState(fetchData('user') || {});
         const [reminders, setReminders] = useState([]);
@@ -62,10 +63,13 @@ const MainContextProvider = ({children}) => {
         }, [token]);
 
         useEffect(() => {storeData("user", user)}, [user])
+        useEffect(() => {storeData("theme", theme)}, [theme])
 
         return (
                 <MainContext.Provider
                         value={{
+                                theme,
+                                setTheme,
                                 storeData,
                                 fetchData,
                                 token,

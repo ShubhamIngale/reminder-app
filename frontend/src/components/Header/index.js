@@ -13,7 +13,7 @@ const Header = (
         }
         ) => {
 
-                const {user, getRemindersHandler} = useContext(MainContext);
+                const {user, getRemindersHandler, theme, setTheme} = useContext(MainContext);
 
                 const [loading, setLoading] = useState(false);
                 const [reminderModal, setReminderModal] = useState(false);
@@ -80,6 +80,18 @@ const Header = (
                         style={{marginLeft: "auto", marginRight: 8}}
                         icon={<PlusOutlined />}
                         onClick={() => setReminderModal(true)}
+                />
+                <Button 
+                        type="link"
+                        icon={theme === "light" ? "D" : "L"}
+                        onClick={() => {
+                                if(theme === "light") {
+                                        setTheme("dark")
+                                }
+                                else {
+                                        setTheme("light")
+                                }
+                        }}
                 />
                 <Button
                         type="link"
