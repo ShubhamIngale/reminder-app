@@ -111,6 +111,7 @@ const Header = (
                 onCancel={() => setReminderModal(false)}
                 title="Add Reminder"
                 footer={[]}
+                style={{filter: theme === "light" ? "invert(0)" : "invert(90%)"}}
         >
                 <Form 
                 layout='vertical'
@@ -172,6 +173,7 @@ const Header = (
                 onCancel={() => setLogoutModal(false)}
                 width="300px"
                 className='logout-modal'
+                style={{filter: theme === "light" ? "invert(0)" : "invert(90%)"}}
         >
                 <h2>Logout?</h2>
                 <Space>
